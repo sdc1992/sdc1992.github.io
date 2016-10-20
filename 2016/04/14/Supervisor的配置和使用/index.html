@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Supervisor的配置和使用 | sdc1992&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装Supervisor1234# 以下三个选一个pip install supervisoreasy_install supervisorapt-get install supervisor
+
+生成默认配置文件生成默认配置文件的方法如下：
+1echo_supervisord_conf &amp;gt; /etc/supervisord.conf
+
+配置文件常用配置如下：
+1234567891011121">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Supervisor的配置和使用">
+<meta property="og:url" content="http://www.sdc1992.com/2016/04/14/Supervisor的配置和使用/index.html">
+<meta property="og:site_name" content="sdc1992's Blog">
+<meta property="og:description" content="安装Supervisor1234# 以下三个选一个pip install supervisoreasy_install supervisorapt-get install supervisor
+
+生成默认配置文件生成默认配置文件的方法如下：
+1echo_supervisord_conf &amp;gt; /etc/supervisord.conf
+
+配置文件常用配置如下：
+1234567891011121">
+<meta property="og:updated_time" content="2016-08-20T07:11:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Supervisor的配置和使用">
+<meta name="twitter:description" content="安装Supervisor1234# 以下三个选一个pip install supervisoreasy_install supervisorapt-get install supervisor
+
+生成默认配置文件生成默认配置文件的方法如下：
+1echo_supervisord_conf &amp;gt; /etc/supervisord.conf
+
+配置文件常用配置如下：
+1234567891011121">
+  
+    <link rel="alternative" href="/atom.xml" title="sdc1992&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/sdc1992.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sdc1992</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">sdc1992</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/sdc1992.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sdc1992</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Supervisor的配置和使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Supervisor的配置和使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装Supervisor"><a href="#安装Supervisor" class="headerlink" title="安装Supervisor"></a><a href="#安装Supervisor" title="安装Supervisor"></a>安装Supervisor</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下三个选一个</span></span><br><span class="line">pip <span class="keyword">install</span> supervisor</span><br><span class="line">easy_install supervisor</span><br><span class="line">apt-get <span class="keyword">install</span> supervisor</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成默认配置文件"><a href="#生成默认配置文件" class="headerlink" title="生成默认配置文件"></a><a href="#生成默认配置文件" title="生成默认配置文件"></a>生成默认配置文件</h2><p>生成默认配置文件的方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span>_supervisord_conf &gt; /etc/supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<p>配置文件常用配置如下：</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">[unix_http_server]</span><br><span class="line"><span class="keyword">file</span>=/data/supervisord/supervisor.sock   ; (the path <span class="keyword">to</span> the socket <span class="keyword">file</span>) 名字可以自己改</span><br><span class="line">;chmod=<span class="number">0700</span>                 ; socket <span class="keyword">file</span> mode (<span class="keyword">default</span> <span class="number">0700</span>)</span><br><span class="line">;chown=nobody:nogroup       ; socket <span class="keyword">file</span> uid:gid owner</span><br><span class="line">;username=user              ; (<span class="keyword">default</span> <span class="keyword">is</span> no username (<span class="keyword">open</span> server))</span><br><span class="line">;password=<span class="number">123</span>               ; (<span class="keyword">default</span> <span class="keyword">is</span> no password (<span class="keyword">open</span> server))</span><br><span class="line"></span><br><span class="line">[inet_http_server]          ; inet (TCP) server disabled by <span class="keyword">default</span></span><br><span class="line"><span class="keyword">port</span>=<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9001</span>         ; (ip_address:<span class="keyword">port</span> specifier, *:<span class="keyword">port</span> <span class="keyword">for</span> <span class="keyword">all</span> iface)</span><br><span class="line">username=username           ; (<span class="keyword">default</span> <span class="keyword">is</span> no username (<span class="keyword">open</span> server))</span><br><span class="line">password=password           ; (<span class="keyword">default</span> <span class="keyword">is</span> no password (<span class="keyword">open</span> server))</span><br><span class="line"></span><br><span class="line">[supervisord]</span><br><span class="line">logfile=/data/supervisord/supervisord.log ; 主日志文件。名字可以自己改</span><br><span class="line">logfile_maxbytes=<span class="number">50</span>MB        ; (max main logfile bytes b4 rotation;<span class="keyword">default</span> <span class="number">50</span>MB)</span><br><span class="line">logfile_backups=<span class="number">10</span>           ; (num <span class="keyword">of</span> main logfile rotation backups;<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">loglevel=info                ; (log level;<span class="keyword">default</span> info; <span class="keyword">others</span>: debug,warn,trace)</span><br><span class="line">pidfile=/data/supervisord/supervisord.pid ; (supervisord pidfile;<span class="keyword">default</span> supervisord.pid)名字同上可以自己改</span><br><span class="line">nodaemon=false               ; (start <span class="keyword">in</span> foreground <span class="keyword">if</span> true;<span class="keyword">default</span> false)</span><br><span class="line">minfds=<span class="number">1024</span>                  ; (min. avail startup <span class="keyword">file</span> descriptors;<span class="keyword">default</span> <span class="number">1024</span>)</span><br><span class="line">minprocs=<span class="number">200</span>                 ; (min. avail <span class="keyword">process</span> descriptors;<span class="keyword">default</span> <span class="number">200</span>)</span><br><span class="line">;umask=<span class="number">022</span>                   ; (<span class="keyword">process</span> <span class="keyword">file</span> creation umask;<span class="keyword">default</span> <span class="number">022</span>)</span><br><span class="line">;user=chrism                 ; (<span class="keyword">default</span> <span class="keyword">is</span> current user, required <span class="keyword">if</span> root)</span><br><span class="line">;identifier=supervisor       ; (supervisord identifier, <span class="keyword">default</span> <span class="keyword">is</span> <span class="symbol">‘supervisor</span>‘)</span><br><span class="line">;directory=/tmp              ; (<span class="keyword">default</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">to</span> cd during start)</span><br><span class="line">;nocleanup=true              ; (don<span class="symbol">‘t</span> clean up tempfiles at start;<span class="keyword">default</span> false)</span><br><span class="line">;childlogdir=/tmp            ; (<span class="symbol">‘AUTO</span>‘ child log dir, <span class="keyword">default</span> $TEMP)</span><br><span class="line">;environment=KEY=<span class="string">“value”</span>     ; (key value pairs <span class="keyword">to</span> add <span class="keyword">to</span> environment)</span><br><span class="line">;strip_ansi=false            ; (strip ansi escape codes <span class="keyword">in</span> logs; def. false)</span><br><span class="line"></span><br><span class="line">; the below section must remain <span class="keyword">in</span> the config <span class="keyword">file</span> <span class="keyword">for</span> RPC</span><br><span class="line">; (supervisorctl/web interface) <span class="keyword">to</span> work, additional interfaces may be</span><br><span class="line">; added by defining them <span class="keyword">in</span> separate rpcinterface: sections</span><br><span class="line">[rpcinterface:supervisor]</span><br><span class="line">supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface</span><br><span class="line"></span><br><span class="line">[supervisorctl]</span><br><span class="line">serverurl=unix:///data/supervisord/supervisor.sock ; <span class="keyword">use</span> a unix:// URL  <span class="keyword">for</span> a unix socket 名字可以自己改</span><br><span class="line">;serverurl=http://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">9001</span> ; <span class="keyword">use</span> an http:// url <span class="keyword">to</span> specify an inet socket</span><br><span class="line">;username=chris              ; should be same as http_username <span class="keyword">if</span> set</span><br><span class="line">;password=<span class="number">123</span>                ; should be same as http_password <span class="keyword">if</span> set</span><br><span class="line">;prompt=mysupervisor         ; cmd line prompt (<span class="keyword">default</span> <span class="string">“supervisor”</span>)</span><br><span class="line">;history_file=~/.sc_history  ; <span class="keyword">use</span> readline history <span class="keyword">if</span> available</span><br><span class="line"></span><br><span class="line">; The below sample program section shows <span class="keyword">all</span> possible program subsection values,</span><br><span class="line">; create one <span class="keyword">or</span> more <span class="symbol">‘real</span>‘ program: sections <span class="keyword">to</span> be able <span class="keyword">to</span> control them under</span><br><span class="line">; supervisor.</span><br><span class="line"></span><br><span class="line">[program:theprogramname]       ; theprogramname为程序的名字，自己起</span><br><span class="line">command=/bin/cat              ; 启动程序要执行的命令，如：python test.py</span><br><span class="line">process_name=%(program_name)s ; 进程名，默认为%(program_name)s</span><br><span class="line">numprocs=<span class="number">1</span>                    ; 启动进程的数量，默认为<span class="number">1</span></span><br><span class="line">directory=/tmp                ; 执行上述command前需要将路径切换到的位置，可用%(here)s表示本配置文件所在的位置</span><br><span class="line">;umask=<span class="number">022</span>                     ; umask <span class="keyword">for</span> <span class="keyword">process</span> (<span class="keyword">default</span> None)</span><br><span class="line">;priority=<span class="number">999</span>                  ; the relative start priority (<span class="keyword">default</span> <span class="number">999</span>)</span><br><span class="line">;autostart=true                ; start at supervisord start (<span class="keyword">default</span>: true)</span><br><span class="line">autorestart=true               ; whether/<span class="keyword">when</span> <span class="keyword">to</span> restart (<span class="keyword">default</span>: unexpected)</span><br><span class="line">startsecs=<span class="number">10</span>                   ; number <span class="keyword">of</span> secs prog must stay running (def. <span class="number">1</span>)</span><br><span class="line">;startretries=<span class="number">3</span>                ; max # <span class="keyword">of</span> serial start failures (<span class="keyword">default</span> <span class="number">3</span>)</span><br><span class="line">;exitcodes=<span class="number">0</span>,<span class="number">2</span>                 ; <span class="symbol">‘expected</span>‘ <span class="keyword">exit</span> codes <span class="keyword">for</span> <span class="keyword">process</span> (<span class="keyword">default</span> <span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line">stopsignal=TERM                ; <span class="keyword">signal</span> used <span class="keyword">to</span> kill <span class="keyword">process</span> (<span class="keyword">default</span> TERM)</span><br><span class="line">;stopwaitsecs=<span class="number">10</span>               ; max num secs <span class="keyword">to</span> <span class="keyword">wait</span> b4 SIGKILL (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">stopasgroup=true             ; send stop <span class="keyword">signal</span> <span class="keyword">to</span> the UNIX <span class="keyword">process</span> <span class="keyword">group</span> (<span class="keyword">default</span> false)</span><br><span class="line">killasgroup=true             ; SIGKILL the UNIX <span class="keyword">process</span> <span class="keyword">group</span> (def false)</span><br><span class="line">;user=chrism                   ; setuid <span class="keyword">to</span> this UNIX account <span class="keyword">to</span> run the program</span><br><span class="line">redirect_stderr=false          ; redirect proc stderr <span class="keyword">to</span> stdout (<span class="keyword">default</span> false)</span><br><span class="line">stdout_logfile=/data/supervisord/%(program_name)s.log        ; stdout log path, NONE <span class="keyword">for</span> none; <span class="keyword">default</span> AUTO</span><br><span class="line">stdout_logfile_maxbytes=<span class="number">100</span>MB   ; max # logfile bytes b4 rotation (<span class="keyword">default</span> <span class="number">50</span>MB)</span><br><span class="line">stdout_logfile_backups=<span class="number">10</span>     ; # <span class="keyword">of</span> stdout logfile backups (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">stdout_capture_maxbytes=<span class="number">100</span>MB   ; number <span class="keyword">of</span> bytes <span class="keyword">in</span> <span class="symbol">‘capturemode</span>‘ (<span class="keyword">default</span> <span class="number">0</span>)</span><br><span class="line">;stdout_events_enabled=false   ; emit events <span class="keyword">on</span> stdout writes (<span class="keyword">default</span> false)</span><br><span class="line">stderr_logfile=/data/supervisord/%(program_name)s.err        ; stderr log path, NONE <span class="keyword">for</span> none; <span class="keyword">default</span> AUTO</span><br><span class="line">stderr_logfile_maxbytes=<span class="number">100</span>MB   ; max # logfile bytes b4 rotation (<span class="keyword">default</span> <span class="number">50</span>MB)</span><br><span class="line">stderr_logfile_backups=<span class="number">10</span>     ; # <span class="keyword">of</span> stderr logfile backups (<span class="keyword">default</span> <span class="number">10</span>)</span><br><span class="line">stderr_capture_maxbytes=<span class="number">100</span>MB   ; number <span class="keyword">of</span> bytes <span class="keyword">in</span> <span class="symbol">‘capturemode</span>‘ (<span class="keyword">default</span> <span class="number">0</span>)</span><br><span class="line">;stderr_events_enabled=false   ; emit events <span class="keyword">on</span> stderr writes (<span class="keyword">default</span> false)</span><br><span class="line">;environment=A=<span class="string">“1”</span>,B=<span class="string">“2”</span>       ; <span class="keyword">process</span> environment additions (def no adds)</span><br><span class="line">;serverurl=AUTO                ; override serverurl computation (childutils)</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动Supervisor"><a href="#启动Supervisor" class="headerlink" title="启动Supervisor"></a><a href="#启动Supervisor" title="启动Supervisor"></a>启动Supervisor</h2><p>通过如下命令使用上述配置文件启动Supervisor：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisord -c <span class="meta-keyword">/etc/</span>supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="管理Supervisor中的进程"><a href="#管理Supervisor中的进程" class="headerlink" title="管理Supervisor中的进程"></a><a href="#管理Supervisor中的进程" title="管理Supervisor中的进程"></a>管理Supervisor中的进程</h2><p>通过supervisorctl可以对Supervisor启动的进程进行管理，首先使用下面的命令打开Supervisor的控制台：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">supervisorctl -c <span class="meta-keyword">/etc/</span>supervisord.conf</span><br></pre></td></tr></table></figure>
+
+<p>相关命令如下：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">status                 <span class="comment">;查看supervisor中的进程状态</span></span><br><span class="line"><span class="keyword">stop</span> programxxx     <span class="comment">;停止programxxx进程</span></span><br><span class="line">start programxxx     <span class="comment">;启动programxxx进程</span></span><br><span class="line">restart programxxx     <span class="comment">;重启programxxx进程</span></span><br><span class="line"><span class="keyword">stop</span> all             <span class="comment">;停止全部进程</span></span><br><span class="line">start all             <span class="comment">;开始全部进程</span></span><br><span class="line">restart all         <span class="comment">;重启全部进程</span></span><br><span class="line">reload                 <span class="comment">;载入最新的配置文件，停止原有进程并按新的配置启动、管理所有进程</span></span><br><span class="line">update                 <span class="comment">;根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而重启</span></span><br></pre></td></tr></table></figure>
+
+<p><em>注：<code>programxxx</code>为<code>[program:theprogramname]</code>里配置的值</em></p>
+<p>另外，通过Web端也可以进行管理，地址及认证信息详见<code>[inet_http_server]</code>中的配置。</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/14/Supervisor的配置和使用/" class="archive-article-date">
+  	<time datetime="2016-04-14T02:32:32.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具/">工具</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/14/Python-Requests抓取网页时编码错误的解决方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Python+Requests抓取网页时编码错误的解决方案
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sdc1992
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wooyun.org/">WooYun</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tangscan.com/">TangScan</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">一个我自己……</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python实现模拟提交前端RSA加密数据的表单 | sdc1992&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前最近在写一个模拟登陆腾讯企业邮箱的东西，但是发现在POST的数据中有一个p字段的内容是一个加密的字符串。经过查看源码发现p字段的值原来是由表单中pp和ts两个字段的值拼接并进行RSA加密的结果经过base64编码后得来的，其中pp字段是用户输入的密码，而ts字段是一个时间戳（在页面源码中已经给出）。最初的想法比较偷懒，想去直接调JS代码算出个结果返回回来，但是发现掉这个JS太麻烦了，还不如直">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现模拟提交前端RSA加密数据的表单">
+<meta property="og:url" content="http://www.sdc1992.com/2016/04/14/Python实现模拟提交前端RSA加密数据的表单/index.html">
+<meta property="og:site_name" content="sdc1992's Blog">
+<meta property="og:description" content="写在前最近在写一个模拟登陆腾讯企业邮箱的东西，但是发现在POST的数据中有一个p字段的内容是一个加密的字符串。经过查看源码发现p字段的值原来是由表单中pp和ts两个字段的值拼接并进行RSA加密的结果经过base64编码后得来的，其中pp字段是用户输入的密码，而ts字段是一个时间戳（在页面源码中已经给出）。最初的想法比较偷懒，想去直接调JS代码算出个结果返回回来，但是发现掉这个JS太麻烦了，还不如直">
+<meta property="og:image" content="http://www.sdc1992.com/image/2015081901.jpg">
+<meta property="og:image" content="http://www.sdc1992.com/image/2015081902.jpg">
+<meta property="og:updated_time" content="2016-08-20T07:11:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现模拟提交前端RSA加密数据的表单">
+<meta name="twitter:description" content="写在前最近在写一个模拟登陆腾讯企业邮箱的东西，但是发现在POST的数据中有一个p字段的内容是一个加密的字符串。经过查看源码发现p字段的值原来是由表单中pp和ts两个字段的值拼接并进行RSA加密的结果经过base64编码后得来的，其中pp字段是用户输入的密码，而ts字段是一个时间戳（在页面源码中已经给出）。最初的想法比较偷懒，想去直接调JS代码算出个结果返回回来，但是发现掉这个JS太麻烦了，还不如直">
+<meta name="twitter:image" content="http://www.sdc1992.com/image/2015081901.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="sdc1992&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/sdc1992.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sdc1992</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">sdc1992</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/sdc1992.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sdc1992</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Python实现模拟提交前端RSA加密数据的表单" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python实现模拟提交前端RSA加密数据的表单
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前"><a href="#写在前" class="headerlink" title="写在前"></a><a href="#写在前" title="写在前"></a>写在前</h2><p>最近在写一个模拟登陆腾讯企业邮箱的东西，但是发现在POST的数据中有一个p字段的内容是一个加密的字符串。经过查看源码发现p字段的值原来是由表单中pp和ts两个字段的值拼接并进行RSA加密的结果经过base64编码后得来的，其中pp字段是用户输入的密码，而ts字段是一个时间戳（在页面源码中已经给出）。最初的想法比较偷懒，想去直接调JS代码算出个结果返回回来，但是发现掉这个JS太麻烦了，还不如直接用Python代码重新实现一遍这个加密算法呢……于是乎，折腾起来吧~</p>
+<p><img src="/image/2015081901.jpg" alt="关于p值的来历"></p>
+<!--
+    var PublicKey = "CF87D7B4C864F4842F1D337491A48FFF54B73A17300E8E42FA365420393AC0346AE55D8AFAD975DFA175FAF0106CBA81AF1DDE4ACEC284DAC6ED9A0D8FEB1CC070733C58213EFFED46529C54CEA06D774E3CC7E073346AEBD6C66FC973F299EB74738E400B22B1E7CDC54E71AED059D228DFEB5B29C530FF341502AE56DDCFE9";
+    var RSA = new RSAKey();
+    RSA.setPublic(PublicKey, "10001");
+    var PublicTs = "1439993542";
+
+    var Res = RSA.encrypt(document.form1.pp.value + '\n' + document.form1.ts.value + '\n');
+    if (Res) {
+        if (document.form1.chg.value == 1) {
+            document.form1.p.value = hex2b64(Res);
+        } else {
+            if (document.form1.ppp.value != "") {
+                document.form1.p.value = document.form1.ppp.value;
+            } else {
+                document.form1.p.value = hex2b64(Res);
+            }
+        }
+    }
+-->
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a><a href="#实现" title="实现"></a>实现</h2><p>首先，获取RSA算法的公钥和ts值很简单，直接从页面源码中按字符串处理的方式即可提取出公钥（当然，这里上个正则秀个操作也可以~），而ts的值从form表单中即可获取。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提取RSA算法的公钥</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_key</span><span class="params">(content)</span>:</span></span><br><span class="line">    base_pos = content.find(<span class="string">‘“‘</span>, content.find(<span class="string">‘var PublicKey = ‘</span>)) + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> content[base_pos: base_pos + <span class="number">256</span>]</span><br></pre></td></tr></table></figure>
+
+<p>RSA算法的实现可以直接使用第三方库rsa，将加密后结果（十六进制）做base64编码即为所求的p值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_p</span><span class="params">(public_key_str, password, ts)</span>:</span></span><br><span class="line">    public_key = rsa.PublicKey(int(public_key_str, <span class="number">16</span>), <span class="number">65537</span>)</span><br><span class="line">    res_tmp = rsa.encrypt(<span class="string">‘&#123;password&#125;\n&#123;ts&#125;\n’</span>.format(password = password, ts = ts), public_key)</span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(res_tmp)</span><br></pre></td></tr></table></figure>
+
+<p>如果有细心的人验证结果是否正确时可能会发现我们算出来的p值和抓包抓到的提交的p值完全不同，但是不要慌，因为RSA算法在进行加密时会进行一个随机填充（而不是填充固定值，如全0），所以由于填充的值不同，我们算出来的结果与抓包看到的p值不同是正常的，不影响正常登录。</p>
+<p>在提交完登录表单后会得到一个“重定向”的页面，这个页面里就包含了登陆进邮箱的地址targetUrl，并通过window.location.replace的方法将窗口“重定向”到了targetUrl。</p>
+<p><img src="/image/2015081902.jpg" alt="登录成功后的返回结果"></p>
+<p>好了，任务完成~</p>
+<h2 id="前端加密在安全上的用途"><a href="#前端加密在安全上的用途" class="headerlink" title="前端加密在安全上的用途"></a><a href="#前端加密在安全上的用途" title="前端加密在安全上的用途"></a>前端加密在安全上的用途</h2><p>了解安全的人都知道，明文传输登录表单是件很不安全的事情，因为我们无法保证数据在传输过程中的安全性，如果表单内容被嗅探，攻击者便可轻松直接拿到我们的帐号密码。对于这个问题一个比较好的解决办法就是启用HTTPS，使用HTTPS的安全性固然很高，但是由于其在经济、性能等方面都需要花费较大的成本，所以这种方案的应用并不十分普遍，而前端加密则是一种比较常见的替代方案，它通过前端JS对敏感数据加密然后再进行传输，可以很大程度上的减少资源的消耗。</p>
+<p>下面以登录为例，我们来看一下通过前端加密传输密码的过程。</p>
+<p>首先在我们请求登录页面的时候，服务器会将一个公钥（PublicKey）和一段用于加密的JS代码一起发给用户，在提交表单时浏览器会先执行这段JS代码对密码进行加密，然后将加密后的密码密文连通表单其他数据一起提交到服务器。这样数据包即使在传输过程中被嗅探到，但是由于没有私钥，攻击者仍然无法拿到真正的密码。</p>
+<p>在此基础上，为了防止重放攻击等问题，服务器通常还会在用户请求登录页面的时候给用户发送一个盐值（salt），JS在进行加密时会将盐值和密码的明文一起加密。这样，由于每次的盐值不同所以每次加密后的密文也会不同，这样可以有效的避免重放攻击。</p>
+<p>对于上面所提到的“用于加密的JS代码”的加密算要求是公钥加密算法，这样可以有效的防止攻击者解出密码的明文，一般多为RSA算法。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a><a href="#最后" title="最后"></a>最后</h2><p>虽然前端通过JS加密表单敏感数据的方法新浪微博、人人网等一些网站都在使用，但是目前网上关于这种方案的相关介绍还不是很多，所以如果您有这方面的资料或者经验可以分享的欢迎点击页面左侧的小信封Email我，非常感激~</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/14/Python实现模拟提交前端RSA加密数据的表单/" class="archive-article-date">
+  	<time datetime="2016-04-14T02:34:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/14/VPS上传下载文件方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          VPS上传下载文件方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/14/Python-Requests抓取网页时编码错误的解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python+Requests抓取网页时编码错误的解决方案</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sdc1992
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wooyun.org/">WooYun</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tangscan.com/">TangScan</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">一个我自己……</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

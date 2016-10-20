@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python+Requests抓取网页时编码错误的解决方案 | sdc1992&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前Requests是Python在处理网页方面的一个特别强大的库，他可以自动管理cookie、自定义http头等等，在写爬虫、模拟登录等程序时非常便捷。但是一提到处理网页就不得不提到那个令人头疼的问题——编码。对于各种编码的兼容实在是让人抓狂，但是问题终归要解决。这不这次在做一个页面识别程序的时候不得不去直面他了……
+Requests的编码问题Requests在处理编码问题的方面确实有些不足，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python+Requests抓取网页时编码错误的解决方案">
+<meta property="og:url" content="http://www.sdc1992.com/2016/04/14/Python-Requests抓取网页时编码错误的解决方案/index.html">
+<meta property="og:site_name" content="sdc1992's Blog">
+<meta property="og:description" content="写在前Requests是Python在处理网页方面的一个特别强大的库，他可以自动管理cookie、自定义http头等等，在写爬虫、模拟登录等程序时非常便捷。但是一提到处理网页就不得不提到那个令人头疼的问题——编码。对于各种编码的兼容实在是让人抓狂，但是问题终归要解决。这不这次在做一个页面识别程序的时候不得不去直面他了……
+Requests的编码问题Requests在处理编码问题的方面确实有些不足，">
+<meta property="og:updated_time" content="2016-08-20T07:11:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python+Requests抓取网页时编码错误的解决方案">
+<meta name="twitter:description" content="写在前Requests是Python在处理网页方面的一个特别强大的库，他可以自动管理cookie、自定义http头等等，在写爬虫、模拟登录等程序时非常便捷。但是一提到处理网页就不得不提到那个令人头疼的问题——编码。对于各种编码的兼容实在是让人抓狂，但是问题终归要解决。这不这次在做一个页面识别程序的时候不得不去直面他了……
+Requests的编码问题Requests在处理编码问题的方面确实有些不足，">
+  
+    <link rel="alternative" href="/atom.xml" title="sdc1992&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <script src="/style.js"></script>
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/sdc1992.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">sdc1992</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">友情链接</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="3" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+		        
+					<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+		        
+					<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">sdc1992</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/sdc1992.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">sdc1992</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">技术在于折腾，所以这是本作妖的帐……</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/sdc1992" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/sdc1992" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/sdc1992" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:sdc1992@sdc1992.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-Python-Requests抓取网页时编码错误的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python+Requests抓取网页时编码错误的解决方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前"><a href="#写在前" class="headerlink" title="写在前"></a><a href="#写在前" title="写在前"></a>写在前</h2><p>Requests是Python在处理网页方面的一个特别强大的库，他可以自动管理cookie、自定义http头等等，在写爬虫、模拟登录等程序时非常便捷。但是一提到处理网页就不得不提到那个令人头疼的问题——编码。对于各种编码的兼容实在是让人抓狂，但是问题终归要解决。这不这次在做一个页面识别程序的时候不得不去直面他了……</p>
+<h2 id="Requests的编码问题"><a href="#Requests的编码问题" class="headerlink" title="Requests的编码问题"></a><a href="#Requests的编码问题" title="Requests的编码问题"></a>Requests的编码问题</h2><p>Requests在处理编码问题的方面确实有些不足，对于中文，有时候他会出现乱码，查了一下，在@LiGuangming 的博客中找到了原因：Requests默认的编码识别比较简单，直接从响应头文件的Content-Type里获取，如果存在charset，则可以正确识别，如果不存在charset但是存在text就认为是ISO-8859-1，详见utils.py：</p>
+<p>（约第306行）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_encoding_from_headers</span><span class="params">(headers)</span>:</span></span><br><span class="line">    <span class="string">“””Returns encodings from given HTTP Header Dict.</span><br><span class="line"></span><br><span class="line">    :param headers: dictionary to extract encoding from.</span><br><span class="line">    “””</span></span><br><span class="line"></span><br><span class="line">    content_type = headers.get(<span class="string">‘content-type’</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> content_type:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line">    content_type, params = cgi.parse_header(content_type)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">‘charset’</span> <span class="keyword">in</span> params:</span><br><span class="line">        <span class="keyword">return</span> params[<span class="string">‘charset’</span>].strip(<span class="string">“‘\””</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">‘text’</span> <span class="keyword">in</span> content_type:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">‘ISO-8859-1’</span></span><br></pre></td></tr></table></figure>
+
+<p>在models.py(636行、761行左右)中可以看到Requests在encoding等于None的时候可以使用chardet来检测编码：</p>
+<p>（约第636行）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">apparent_encoding</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">“””The apparent encoding, provided by the chardet library”””</span></span><br><span class="line">    <span class="keyword">return</span> chardet.detect(self.content)[<span class="string">‘encoding’</span>]</span><br></pre></td></tr></table></figure>
+
+<p>（约第760行）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fallback to auto-detected encoding.</span></span><br><span class="line">    <span class="keyword">if</span> self.encoding <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        encoding = self.apparent_encoding</span><br></pre></td></tr></table></figure>
+
+<p>对此网上给出了常见的解决方案——给Requests打一个补丁：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">monkey_patch</span><span class="params">()</span>:</span></span><br><span class="line">    prop = requests.models.Response.content</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">content</span><span class="params">(self)</span>:</span></span><br><span class="line">        _content = prop.fget(self)</span><br><span class="line">        <span class="keyword">if</span> self.encoding == <span class="string">‘ISO-8859-1’</span>:</span><br><span class="line">            encodings = requests.utils.get_encodings_from_content(_content)</span><br><span class="line">            <span class="keyword">if</span> encodings:</span><br><span class="line">                self.encoding = encodings[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># self.encoding = self.apparent_encoding</span></span><br><span class="line">                self.encoding = chardet.detect(_content)[<span class="string">‘encoding’</span>]</span><br><span class="line">            _content = _content.decode(self.encoding, <span class="string">‘replace’</span>).encode(<span class="string">‘utf8’</span>, <span class="string">‘replace’</span>)</span><br><span class="line">            self._content = _content</span><br><span class="line">        <span class="keyword">return</span> _content</span><br><span class="line">    requests.models.Response.content = property(content)</span><br><span class="line">monkey_patch()</span><br></pre></td></tr></table></figure>
+
+<p><em>注：这里我将第10行替换成了第11行，因为曾经产生过“死递归”，为避免在产生类似的错误，这里做了一下微调。</em></p>
+<h2 id="补丁过后还有问题"><a href="#补丁过后还有问题" class="headerlink" title="补丁过后还有问题"></a><a href="#补丁过后还有问题" title="补丁过后还有问题"></a>补丁过后还有问题</h2><p>当我这种方法处理一些gb2312编码网页还是出现了乱码的情况……</p>
+<p>查找相关资料发现，当我们访问<code>response.text</code>时，Requests是根据响应报文的HTTP头推测出的编码进行解码的（至于推测过程，上面已经介绍），如果这个推测值错了，那么出现乱码也就可以理解了。</p>
+<p>那么怎么办呢？好在Requests允许我们通过给<code>response.encoding</code>赋值的方式来修改文本编码，并且当访问<code>response.text</code>时Requests将会使用<code>response.encoding</code>的新值进行解码。</p>
+<p>对于识别编码我们可以使用好评率较高的chardet库来实现，但是这里我推荐大家使用cchardet这个库，原因只有一个：快！</p>
+<p>所以我们只要在使用<code>response.text</code>前执行下面的语句就可以啦~</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.encoding = cchardet.detect(response.content)[<span class="string">‘encoding’</span>]</span><br></pre></td></tr></table></figure>
+
+<p>到此，问题已经解决了，爬坑到此结束~</p>
+<p>如果大牛有更好的、更漂亮的解决方案欢迎前来指点，您的一句或许可以帮助许多人少进一个坑，所以在此先表示感谢了，谢谢~</p>
+<p>当然，由于测试数据有限，不保证此方案可以解决所有问题，如您遇到了问题，欢迎指出，我们可以一起解决~</p>
+<h2 id="关于cchardet的安装"><a href="#关于cchardet的安装" class="headerlink" title="关于cchardet的安装"></a><a href="#关于cchardet的安装" title="关于cchardet的安装"></a>关于cchardet的安装</h2><p>最后补充一句cchardet的安装方式：如您已安装了pip工具通过下面的命令就可以直接安全装了~</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> cchardet</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a><a href="#参考资料" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.liguangming.com/python-requests-ge-encoding-from-headers" target="_blank" rel="external">Python+Requests编码识别Bug</a></li>
+<li><a href="http://requests-docs-cn.readthedocs.org/zh_CN/latest/index.html" target="_blank" rel="external">Requests: HTTP for Humans</a></li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/04/14/Python-Requests抓取网页时编码错误的解决方案/" class="archive-article-date">
+  	<time datetime="2016-04-14T02:33:54.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-04-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/04/14/Python实现模拟提交前端RSA加密数据的表单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Python实现模拟提交前端RSA加密数据的表单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/14/Supervisor的配置和使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Supervisor的配置和使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 sdc1992
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+      <li data-hook="tools-section-friends"><span class="text">友链</span><i class="icon-link"></i></li>
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VPS/" style="font-size: 10px;">VPS</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
+    			</div>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends">
+  		
+  			<div class="friends-wrap" id="js-friends">
+  			
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.wooyun.org/">WooYun</a>
+  	        
+  	          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.tangscan.com/">TangScan</a>
+  	        
+  	        </div>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">一个我自己……</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
